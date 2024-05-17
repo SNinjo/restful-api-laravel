@@ -1,0 +1,15 @@
+/.vscode/
+/test/
+/vendor/
+/mysql/
+.editorconfig
+.env.example
+.gitignore
+.gitattributes
+docker-compose.yml
+Dockerfile
+README.md
+package.json
+phpunit.xml
+vite.config.js
+*.cache

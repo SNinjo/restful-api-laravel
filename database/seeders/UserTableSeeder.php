@@ -8,6 +8,25 @@ use Illuminate\Support\Facades\DB;
 
 class UserTableSeeder extends Seeder
 {
+    public static function getArrayStubs()
+    {
+        return [
+            ['id'=>1, 'name'=>'jo', 'age'=>20],
+            ['id'=>2, 'name'=>'alan', 'age'=>22],
+        ];
+    }
+
+    public static function getObjectStubs($addedStub = null)
+    {
+        $stubs = UserTableSeeder::getArrayStubs();
+        foreach ($stubs as $key => $value)
+        {
+            $stubs[$key] = (object) $value;
+        }
+        if ($addedStub) array_push($stubs, (object) $addedStub);
+        return $stubs;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -15,9 +34,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
-            ['id'=>1, 'name'=>'jo', 'age'=>20],
-            ['id'=>2, 'name'=>'alan', 'age'=>22],
-        ]);
+        DB::table('user')->insert($this->getArrayStubs());
     }
 }
