@@ -1,5 +1,14 @@
 version: '3'
 services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./:/var/www
+      - ./nginx:/etc/nginx/conf.d
   mysql:
     image: mysql
     container_name: mysql
@@ -7,21 +16,13 @@ services:
       - 3306:3306
     volumes:
       - ./mysql:/var/lib/mysql
-    networks:
-      - api
     environment:
       MYSQL_ROOT_PASSWORD: pass
   restful-api-laravel:
     image: restful-api-laravel
     container_name: restful-api-laravel
-    depends_on:
-      - mysql
     ports:
-      - 8000:8000
-    networks:
-      - api
+      - 9000:9000
     environment:
       DB_HOST: mysql
       L5_SWAGGER_GENERATE_ALWAYS: false
-networks:
-  api:
